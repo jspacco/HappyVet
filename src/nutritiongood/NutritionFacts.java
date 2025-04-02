@@ -1,4 +1,4 @@
-package nutrition;
+package nutritiongood;
 
 public class NutritionFacts {
     // Required parameters
