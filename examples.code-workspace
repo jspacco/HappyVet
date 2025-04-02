@@ -1,0 +1,31 @@
+{
+    "folders": [
+      {
+        "path": "."
+      }
+    ],
+    "settings": {
+      "java.project.referencedLibraries": [
+        "lib/*.jar"
+      ],
+      "java.configuration.updateBuildConfiguration": "automatic",
+      "java.debug.settings.console": "integratedTerminal"
+    },
+    
+    "launch": {
+      "configurations": [
+        {
+          "type": "java",
+          "name": "Launch Any Main",
+          "request": "launch",
+          "mainClass": "",
+          "projectName": "examples"
+        }
+      ]
+    },
+    "extensions": {
+      "recommendations": [
+        "vscjava.vscode-java-pack"
+      ]
+    }
+  }

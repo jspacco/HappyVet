@@ -9,6 +9,7 @@ public class Ninja
 
     public String tostring() {
         // does this override?
+        // NO! If we add the @Override annotation, this will not compile
         return "ninja name is " + name;
     }
 

@@ -12,24 +12,25 @@ import java.util.TreeSet;
 
 public class BloodSugarTracker 
 {
-    private Map<String, SortedSet<EatenFood>> foods;
+    private Map<String, List<FoodRecord>> foods;
 
     public BloodSugarTracker() 
     {
         foods = new HashMap<>();
     }
 
-    public void addFood(EatenFood food) 
+    public void addFood(FoodRecord food) 
     {
         String foodName = food.getFoodName();
-        foods.putIfAbsent(foodName, new TreeSet<>());
-        Set<EatenFood> set = foods.get(foodName);
-        set.add(food);
+        //if (!foods.containsKey(foodName)) foods.put(foodName, new LinkedList<>());
+        foods.putIfAbsent(foodName, new LinkedList<>());
+        List<FoodRecord> result = foods.get(foodName);
+        result.add(food);
     }
 
     public void addFood(String foodName, int bloodSugar)
     {
-        addFood(new EatenFood(foodName, bloodSugar));
+        addFood(new FoodRecord(foodName, bloodSugar));
     }
 
     public double getAverage(String foodName)
@@ -40,25 +41,24 @@ public class BloodSugarTracker
         }
         
         double total = 0;
-        for (EatenFood f : foods.get(foodName)) 
+        for (FoodRecord f : foods.get(foodName)) 
         {
             total += f.getBloodSugar();
         }
         return total / foods.get(foodName).size();
     }
 
-    public Collection<EatenFood> getMostRecent(String foodName, int n)
+    public Collection<FoodRecord> getMostRecent(String foodName, int n)
     {
         if (!foods.containsKey(foodName))
         {
             throw new IllegalArgumentException(foodName+" not found");
         }
+
+        List<FoodRecord> result = foods.get(foodName);
         
-        Iterator<EatenFood> it = foods.get(foodName).iterator();
-        List<EatenFood> result = new LinkedList<>();
-        for (int i=0; i<n && it.hasNext(); i++) {
-            result.add(it.next());
-        }
-        return result;
+        if (result.size() < n) return result;
+
+        return result.subList(result.size() - n, result.size());
     }
 }
